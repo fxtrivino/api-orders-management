@@ -38,34 +38,31 @@ La base de datos es ordenesdb y el nombre de la coleccion es orden
 
 El Test de Pruebas Unitarias esta localizado en co.apexglobal.ordersmng.test.OrdenServiceImplTest, este Test cubre el Service para Creacion y Consulta de Ordenes
 
-![Screenshot 2025-05-07 at 3 50 40 PM](https://github.com/user-attachments/assets/a3dc50cf-7584-4782-a521-1aa82a1719de)
+![Screenshot 2025-05-07 at 3 52 30 PM](https://github.com/user-attachments/assets/623cdcd0-b81d-42c9-ae8a-15232044d7ef)
 
 
 ### Creación de orden - Response: HTTP 201 (Created)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/userManagement/v1/users' \
+  'http://localhost:8989/ordenManagement/v1/ordenes' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-    "name": "Juan Rodriguez",
-    "email": "juan@rodriguez.org",
-    "password": "A23tara20$",
-    "phones": [
-            {
-            "number": "1234567",
-            "cityCode": "1",
-            "countryCode": "57"
-            },
-            {
-            "number": "994373861",
-            "cityCode": "12",
-            "countryCode": "58"
-            }
-    ]
+  "idUsuario": "xtrivino9",
+  "items": [
+    {
+      "idProducto": "prod-001",
+      "cantidad": 10,
+      "precioUnitario": 23.45
+    }
+  ]
 }'
 ```
+![Screenshot 2025-05-07 at 6 39 44 PM](https://github.com/user-attachments/assets/e3fa057c-40b5-4c0f-b55d-490b59e5d342)
+
+![Screenshot 2025-05-07 at 6 41 28 PM](https://github.com/user-attachments/assets/3ebcb9ec-ea84-4f15-badf-c375430e0efa)
+
 
 ### Consultar la lista de ordenes con paginación y filtrado por usuario - Response: HTTP 200 (OK)
 
