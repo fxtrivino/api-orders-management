@@ -36,7 +36,7 @@ La base de datos es ordenesdb y el nombre de la coleccion es orden
 
 ### 3. Configuración de MongoDB, Redis y Kafka
 
-Configuración basica que debe ir en el application.properties
+Configuración basica que debe ir en el archivo application.properties
 
 - MongDB Configuration  
 spring.data.mongodb.uri=mongodb://localhost:27017/ordenesdb  
