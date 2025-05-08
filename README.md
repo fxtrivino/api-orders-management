@@ -79,6 +79,9 @@ curl -X 'POST' \
 ```
 ![Screenshot 2025-05-07 at 6 39 44 PM](https://github.com/user-attachments/assets/e3fa057c-40b5-4c0f-b55d-490b59e5d342)
 
+- Kafka
+Topic: "ordenes_creadas"
+
 ![Screenshot 2025-05-07 at 6 41 28 PM](https://github.com/user-attachments/assets/3ebcb9ec-ea84-4f15-badf-c375430e0efa)
 
 
