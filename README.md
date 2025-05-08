@@ -2,7 +2,7 @@
 
 Esta es una aplicación Java / Maven / Spring Boot (version 1.0.0) para creacio y consulta (con Paginación) de Ordenes de Compras.
 
-### Ejecutar la aplicacion localmente
+### 1. Ejecutar la aplicacion localmente
 
 * Clona el repositorio
 * Asegurate de usar JDK 17 o superior y Maven 3.x
@@ -28,20 +28,37 @@ Una vez que la aplicacion se ejecuta visualizaras algo asi:
 2025-05-07T15:43:51.912-05:00 [0;39m  [32m INFO [0;39m  [35m10338 [0;39m  [2m--- [api-orders-management] [n(10)-127.0.0.1]  [0;39m [36mo.s.web.servlet.DispatcherServlet        [0;39m  [2m: [0;39m Completed initialization in 0 ms
 ```
 
-### Creación de DataBase MongoDB y Coleccion Name
+### 2. Creación de DataBase MongoDB y Coleccion Name
 
 La base de datos es ordenesdb y el nombre de la coleccion es orden
 
 ![Screenshot 2025-05-07 at 3 50 40 PM](https://github.com/user-attachments/assets/791d432a-183e-4929-aa97-41eca29ac135)
 
-### Pruebas Unitarias con JUnit y Mockito
+### 3. Configuración de MongoDB, Redis y Kafka
+
+# MongoDB Configuration
+spring.data.mongodb.uri=mongodb://localhost:27017/ordenesdb
+spring.data.mongodb.port=27017
+
+# Redis Configuration
+spring.cache.type=redis
+spring.redis.host=localhost
+spring.redis.port=6379
+
+# Kafka Configuration
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.group-id=orders-group
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+
+### 4. Pruebas Unitarias con JUnit y Mockito
 
 El Test de Pruebas Unitarias esta localizado en co.apexglobal.ordersmng.test.OrdenServiceImplTest, este Test cubre el Service para Creacion y Consulta de Ordenes
 
 ![Screenshot 2025-05-07 at 3 52 30 PM](https://github.com/user-attachments/assets/623cdcd0-b81d-42c9-ae8a-15232044d7ef)
 
 
-### Creación de orden - Response: HTTP 201 (Created)
+### 5. Creación de orden - Response: HTTP 201 (Created)
 Se crea la orden en a Base de Datos MongoDB, se envia informacion de la Orden creada al topico "ordenes_creadas" en Kafka, y se invalida caché en Redis
 
 ```
@@ -65,7 +82,7 @@ curl -X 'POST' \
 ![Screenshot 2025-05-07 at 6 41 28 PM](https://github.com/user-attachments/assets/3ebcb9ec-ea84-4f15-badf-c375430e0efa)
 
 
-### Consultar la lista de ordenes con paginación y filtrado por usuario - Response: HTTP 200 (OK)
+### 6. Consultar la lista de ordenes con paginación y filtrado por usuario - Response: HTTP 200 (OK)
 Se consulta las ordenes en la Base de Datos MongoDB y se almacena en caché (Redis) las ordenes consultadas
 
 ```
@@ -98,16 +115,16 @@ curl -X 'GET' \
 
 
 
-### Para visualizar Swagger 2 API docs
+### 7. Para visualizar Swagger 2 API docs
 
 Ejecutar en el navegador http://localhost:8989/ordenManagement/v1/swagger-ui/index.html
 
 ![Screenshot 2025-05-07 at 4 06 28 PM](https://github.com/user-attachments/assets/73ebfe3e-3356-421b-8983-d5b2a7b69024)
 
 
-### Arquitectura de la Aplicacion
+### 8. Arquitectura de la Aplicacion
 
 
 
 
-### Preguntas y comentarios: fxtrivino@gmail.com
+### 9. Preguntas y comentarios: fxtrivino@gmail.com
