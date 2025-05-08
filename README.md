@@ -38,12 +38,12 @@ La base de datos es ordenesdb y el nombre de la coleccion es orden
 
 - MongDB Configuration
 spring.data.mongodb.uri=mongodb://localhost:27017/ordenesdb
-spring.data.mongodb.port=27017
+spring.data.mongodb.port=27017  
 
 - Redis Configuration
 spring.cache.type=redis
 spring.redis.host=localhost
-spring.redis.port=6379
+spring.redis.port=6379  
 
 - Kafka Configuration
 spring.kafka.bootstrap-servers=localhost:9092
