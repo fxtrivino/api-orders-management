@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.apexglobal.ordersmng.domain.dto.OrdenDTO;
 import co.apexglobal.ordersmng.domain.dto.PageResponseDTO;
 import co.apexglobal.ordersmng.domain.entity.Orden;
 import co.apexglobal.ordersmng.domain.entity.OrdenEvent;
 import co.apexglobal.ordersmng.service.OrdenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Nullable;
 
 /**
  * Controllador que recibe peticiones HTTP para las operaciones relacionadas con
@@ -41,8 +43,8 @@ public class OrdenController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Crear una orden", description = "Crea una nueva orden y la publica en Kafka")
-	public ResponseEntity<Orden> createOrden(@RequestBody Orden orden) {
-		Orden ordenCreated = ordenService.createOrden(orden);
+	public ResponseEntity<Orden> createOrden(@RequestBody OrdenDTO ordenDTO) {
+		Orden ordenCreated = ordenService.createOrden(ordenDTO);
 
 		OrdenEvent event = new OrdenEvent();
 		event.setOrden(ordenCreated);
@@ -54,8 +56,8 @@ public class OrdenController {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Obtener todas las órdenes", description = "Devuelve una lista paginada de órdenes")
-	public ResponseEntity<PageResponseDTO<Orden>> getOrdenByIdUsuarioPageable(@PageableDefault(size = 10, page = 0) Pageable pageable, 
-																		  @RequestParam(required = false) String idUsuario) {
+	public ResponseEntity<PageResponseDTO<Orden>> getOrdenByIdUsuarioPageable(@Nullable @PageableDefault(size = 10, page = 0) Pageable pageable, 
+																		      @RequestParam(required = false) String idUsuario) {
 		PageResponseDTO<Orden> listOrdenes = ordenService.getOrdenByIdUsuarioPageable(idUsuario, pageable);
 		return new ResponseEntity<>(listOrdenes, HttpStatus.OK);
 	}

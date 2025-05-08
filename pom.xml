@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>co.apexglobal</groupId>
 	<artifactId>api-orders-management</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>api-orders-management</name>
 	<description>Purchase order management project for Spring Boot</description>
 	<url/>

@@ -23,5 +23,12 @@ public class GlobalExceptionHandler {
         response.put("mensaje", ex.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
+    
+    @ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> handleException(Exception ex) {
+    	 Map<String, String> response = new HashMap<>();
+         response.put("mensaje", ex.getMessage());
+         return ResponseEntity.internalServerError().body(response);
+    }
 
 }
