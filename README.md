@@ -124,7 +124,7 @@ Ejecutar en el navegador http://localhost:8989/ordenManagement/v1/swagger-ui/ind
 
 ### 8. Arquitectura de la Aplicacion
 
-
+![API-Ordenes drawio (2)](https://github.com/user-attachments/assets/3597ba5c-fb43-4108-8acd-029ef969bdd8)
 
 
 ### 9. Preguntas y comentarios: fxtrivino@gmail.com
