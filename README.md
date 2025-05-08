@@ -36,6 +36,8 @@ La base de datos es ordenesdb y el nombre de la coleccion es orden
 
 ### 3. Configuración de MongoDB, Redis y Kafka
 
+Configuración basica que debe ir en el application.properties
+
 - MongDB Configuration  
 spring.data.mongodb.uri=mongodb://localhost:27017/ordenesdb  
 spring.data.mongodb.port=27017  
@@ -122,7 +124,7 @@ curl -X 'GET' \
 
 Ejecutar en el navegador http://localhost:8989/ordenManagement/v1/swagger-ui/index.html
 
-![Screenshot 2025-05-07 at 4 06 28 PM](https://github.com/user-attachments/assets/73ebfe3e-3356-421b-8983-d5b2a7b69024)
+![Screenshot 2025-05-08 at 7 03 16 AM](https://github.com/user-attachments/assets/cc4bcc73-a47c-4128-9bbc-dc6120c7b027)
 
 
 ### 8. Arquitectura de la Aplicacion
