@@ -1,6 +1,6 @@
-# Spring Boot - API Gestion de Ordenes de Pedidos
+# Spring Boot - API Gestion de Ordenes de Compras
 
-Esta es una aplicación Java / Maven / Spring Boot (version 1.0.0) para creacio y consulta (con Paginación) de Ordenes de Pedidos.
+Esta es una aplicación Java / Maven / Spring Boot (version 1.0.0) para creacio y consulta (con Paginación) de Ordenes de Compras.
 
 ### Ejecutar la aplicacion localmente
 
@@ -21,11 +21,11 @@ java -jar target/api-orders-management-1.0.1-SNAPSHOT.jar
 Una vez que la aplicacion se ejecuta visualizaras algo asi:
 
 ```
-2025-05-07T15:43:51.272-05:00[0;39m [32m INFO[0;39m [35m10338[0;39m [2m--- [api-orders-management] [  restartedMain] [0;39m[36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port 8989 (http) with context path '/ordenManagement/v1'
-2025-05-07T15:43:51.282-05:00[0;39m [32m INFO[0;39m [35m10338[0;39m [2m--- [api-orders-management] [  restartedMain] [0;39m[36mc.a.o.ApiOrdersManagementApplication    [0;39m [2m:[0;39m Started ApiOrdersManagementApplication in 2.177 seconds (process running for 2.558)
-2025-05-07T15:43:51.911-05:00[0;39m [32m INFO[0;39m [35m10338[0;39m [2m--- [api-orders-management] [n(10)-127.0.0.1] [0;39m[36mo.a.c.c.C.[.[.[/ordenManagement/v1]     [0;39m [2m:[0;39m Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-05-07T15:43:51.912-05:00[0;39m [32m INFO[0;39m [35m10338[0;39m [2m--- [api-orders-management] [n(10)-127.0.0.1] [0;39m[36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
-2025-05-07T15:43:51.912-05:00[0;39m [32m INFO[0;39m [35m10338[0;39m [2m--- [api-orders-management] [n(10)-127.0.0.1] [0;39m[36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 0 ms
+2025-05-07T15:43:51.272-05:00 [0;39m  [32m INFO [0;39m  [35m10338 [0;39m  [2m--- [api-orders-management] [  restartedMain]  [0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer  [0;39m  [2m: [0;39m Tomcat started on port 8989 (http) with context path '/ordenManagement/v1'
+2025-05-07T15:43:51.282-05:00 [0;39m  [32m INFO [0;39m  [35m10338 [0;39m  [2m--- [api-orders-management] [  restartedMain]  [0;39m [36mc.a.o.ApiOrdersManagementApplication     [0;39m  [2m: [0;39m Started ApiOrdersManagementApplication in 2.177 seconds (process running for 2.558)
+2025-05-07T15:43:51.911-05:00 [0;39m  [32m INFO [0;39m  [35m10338 [0;39m  [2m--- [api-orders-management] [n(10)-127.0.0.1]  [0;39m [36mo.a.c.c.C.[.[.[/ordenManagement/v1]      [0;39m  [2m: [0;39m Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-07T15:43:51.912-05:00 [0;39m  [32m INFO [0;39m  [35m10338 [0;39m  [2m--- [api-orders-management] [n(10)-127.0.0.1]  [0;39m [36mo.s.web.servlet.DispatcherServlet        [0;39m  [2m: [0;39m Initializing Servlet 'dispatcherServlet'
+2025-05-07T15:43:51.912-05:00 [0;39m  [32m INFO [0;39m  [35m10338 [0;39m  [2m--- [api-orders-management] [n(10)-127.0.0.1]  [0;39m [36mo.s.web.servlet.DispatcherServlet        [0;39m  [2m: [0;39m Completed initialization in 0 ms
 ```
 
 ### Creación de DataBase MongoDB y Coleccion Name
@@ -42,6 +42,7 @@ El Test de Pruebas Unitarias esta localizado en co.apexglobal.ordersmng.test.Ord
 
 
 ### Creación de orden - Response: HTTP 201 (Created)
+Se crea la orden en a Base de Datos MongoDB, se envia informacion de la Orden creada al topico "ordenes_creadas" en Kafka, y se invalida caché en Redis
 
 ```
 curl -X 'POST' \
@@ -65,10 +66,17 @@ curl -X 'POST' \
 
 
 ### Consultar la lista de ordenes con paginación y filtrado por usuario - Response: HTTP 200 (OK)
+Se consulta las ordenes en la Base de Datos MongoDB y se almacena en caché (Redis) las ordenes consultadas
 
 ```
 curl -X 'GET' \
   'http://localhost:8989/ordenManagement/v1/ordenes' \
+  -H 'accept: application/json'
+```
+
+```
+curl -X 'GET' \
+  'http://localhost:8989/ordenManagement/v1/ordenes?idUsuario=xtrivino7' \
   -H 'accept: application/json'
 ```
 
@@ -80,9 +88,15 @@ curl -X 'GET' \
 
 ```
 curl -X 'GET' \
-  'http://localhost:8989/ordenManagement/v1/ordenes?page=0&size=3&idUsuario=xtrivino3' \
+  'http://localhost:8989/ordenManagement/v1/ordenes?page=0&size=3&idUsuario=xtrivino7' \
   -H 'accept: application/json'
 ```
+
+- Redis
+
+![Screenshot 2025-05-08 at 5 13 22 AM](https://github.com/user-attachments/assets/8c45e4da-2abc-4272-9605-953c181db17b)
+
+
 
 ### Para visualizar Swagger 2 API docs
 
