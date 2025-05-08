@@ -116,8 +116,7 @@ curl -X 'GET' \
 
 - Redis
 
-![Screenshot 2025-05-08 at 5 13 22 AM](https://github.com/user-attachments/assets/8c45e4da-2abc-4272-9605-953c181db17b)
-
+![Screenshot 2025-05-08 at 7 28 26 AM](https://github.com/user-attachments/assets/d5a4681e-a66a-4681-a7eb-e374af953ffa)
 
 
 ### 7. Para visualizar Swagger 2 API docs
